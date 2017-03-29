@@ -1,3 +1,51 @@
+import datetime
 from django.db import models
 
-# Create your models here.
+
+class Requirement(models.Model):
+    DEPARTMENT_ZONGCAISHI = '0'
+    DEPARTMENT_ZONGHE = '1'
+    DEPARTMENT_CAIWU = '2'
+    DEPARTMENT_CHUANGXIN = '3'
+    DEPARTMENT_WANGXIAO = '4'
+    DEPARTMENT_CHANXIAN = '5'
+    DEPARTMENT_SHOUXIAN = '6'
+    DEPARTMENT_SHUJU = '7'
+    DEPARTMENT_XINXI = '8'
+
+    CATEGORY_DEVELOPMENT = '0'
+    CATEGORY_OPERATION = '1'
+    CATEGORY_EMERGENCY = '2'
+
+    REQUIREMENT_DEPARTMENT_CHOICES = (
+        (DEPARTMENT_ZONGCAISHI, '总裁室'),
+        (DEPARTMENT_ZONGHE, '综合部'),
+        (DEPARTMENT_CAIWU, '财务部'),
+        (DEPARTMENT_CHUANGXIN, '创新业务部'),
+        (DEPARTMENT_WANGXIAO, '网络销售部'),
+        (DEPARTMENT_CHANXIAN, '产险销售部'),
+        (DEPARTMENT_SHOUXIAN, '寿险电销部'),
+        (DEPARTMENT_SHUJU, '数据管理部'),
+        (DEPARTMENT_XINXI, '信息技术部'),
+    )
+    REQUIREMENT_CATEGORY = (
+        (CATEGORY_DEVELOPMENT, '开发类'),
+        (CATEGORY_OPERATION, '运维类'),
+        (CATEGORY_EMERGENCY, '紧急类'),
+    )
+    r_id = models.AutoField('ID', primary_key=True)
+    r_info_name = models.CharField('需求名称', max_length=100, default='')
+    r_info_submit_time = models.DateTimeField('提交时间')
+    r_info_submit_department = models.CharField('提出部门', choices=REQUIREMENT_DEPARTMENT_CHOICES, max_length=10,
+                                                default=DEPARTMENT_ZONGCAISHI)
+    r_info_submit_person = models.CharField('提出人', max_length=10, default='')
+    r_info_value = models.CharField('价值', max_length=500, default='', blank=True)
+
+    r_category = models.CharField('需求类别', choices=REQUIREMENT_CATEGORY, max_length=10, default='', blank=True)
+    r_leader = models.CharField('任务负责人', max_length=20, default='', blank=True)
+    r_value_ok = models.BooleanField(default=False)
+    r_handle = models.CharField('需求流转地', max_length=50, default='', blank=True)
+    r_status = models.CharField('需求流程状态', max_length=50, default='', blank=True)
+
+    def __str__(self):
+        return self.r_info_name
