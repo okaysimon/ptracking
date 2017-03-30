@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+    <title>需求管理|需求列表</title>
+    <link rel="stylesheet" type="text/css" href="base.css"/>
+    <link rel="stylesheet" type="text/css" href="changelists.css" />
+</head>
+
+<!-- Container -->
+<div id="container">
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"><a href="/admin/">需求管理</a></h1>
+        </div>
+        <div id="user-tools">
+            欢迎，
+            <strong>diaosumeng</strong>.
+            <a href="/">查看</a> /
+            <a href="/admin/password_change/">修改密码</a> /
+            <a href="/admin/logout/">注销</a>
+        </div>
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrumbs">
+        <a href="/admin/">主页</a>
+        &rsaquo; <a href="/admin/ProjectTracking/">需求管理</a>
+        &rsaquo; 需求列表
+    </div>
+
+    <!-- Content -->
+    <div id="content" class="flex">
+        <h1>需求列表</h1>
+        <div id="content-main">
+            <ul class="object-tools">
+                <li>
+                    <a href="/admin/ProjectTracking/requirement/add/" class="addlink">Add requirement</a>
+                </li>
+            </ul>
+
+            <div class="module" id="changelist">
+                <form id="changelist-form" method="post" novalidate><input type='hidden' name='csrfmiddlewaretoken'
+                                                                           value='wi7YjHuEh5vxx9N4se9fwrzn3QdCBhkeZK4eD2RvROcrkVA27X8313XqL1l3ekyc'/>
+                    <div class="results">
+                        <table id="result_list">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="action-checkbox-column">
+
+                                    <div class="text"><span><input type="checkbox" id="action-toggle"/></span></div>
+                                    <div class="clear"></div>
+                                </th>
+                                <th scope="col" class="sortable column-r_info_name">
+                                    <div class="text"><a href="?o=1">需求名称</a></div>
+                                    <div class="clear"></div>
+                                </th>
+                                <th scope="col" class="sortable column-r_info_submit_time">
+                                    <div class="text"><a href="?o=2">提出日期</a></div>
+                                    <div class="clear"></div>
+                                </th>
+                                <th scope="col" class="sortable column-r_info_submit_department">
+                                    <div class="text"><a href="?o=3">提出部门</a></div>
+                                    <div class="clear"></div>
+                                </th>
+                                <th scope="col" class="sortable column-r_info_submit_person">
+                                    <div class="text"><a href="?o=4">提出人</a></div>
+                                    <div class="clear"></div>
+                                </th>
+                                <th scope="col" class="sortable column-r_info_value">
+                                    <div class="text"><a href="?o=5">价值</a></div>
+                                    <div class="clear"></div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr class="row1">
+                                <td class="action-checkbox"><input class="action-select" name="_selected_action"
+                                                                   type="checkbox" value="6"/></td>
+                                <th class="field-r_info_name"><a href="/admin/ProjectTracking/requirement/6/change/">需求3</a>
+                                </th>
+                                <td class="field-r_info_submit_time nowrap">March 30, 2017, 1:21 p.m.</td>
+                                <td class="field-r_info_submit_department">综合部</td>
+                                <td class="field-r_info_submit_person">综合</td>
+                                <td class="field-r_info_value">&nbsp;</td>
+                            </tr>
+
+                            <tr class="row2">
+                                <td class="action-checkbox"><input class="action-select" name="_selected_action"
+                                                                   type="checkbox" value="5"/></td>
+                                <th class="field-r_info_name"><a href="/admin/ProjectTracking/requirement/5/change/">需求2</a>
+                                </th>
+                                <td class="field-r_info_submit_time nowrap">March 30, 2017, 1:20 p.m.</td>
+                                <td class="field-r_info_submit_department">财务部</td>
+                                <td class="field-r_info_submit_person">财务</td>
+                                <td class="field-r_info_value">&nbsp;</td>
+                            </tr>
+
+                            <tr class="row1">
+                                <td class="action-checkbox"><input class="action-select" name="_selected_action"
+                                                                   type="checkbox" value="4"/></td>
+                                <th class="field-r_info_name"><a href="/admin/ProjectTracking/requirement/4/change/">需求1</a>
+                                </th>
+                                <td class="field-r_info_submit_time nowrap">March 30, 2017, 11:53 a.m.</td>
+                                <td class="field-r_info_submit_department">信息技术部</td>
+                                <td class="field-r_info_submit_person">IT</td>
+                                <td class="field-r_info_value">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="paginator">3 requirements</p>
+                </form>
+            </div>
+        </div>
+
+        <br class="clear"/>
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>

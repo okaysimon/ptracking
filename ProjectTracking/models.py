@@ -1,4 +1,3 @@
-import datetime
 from django.db import models
 
 
@@ -39,13 +38,15 @@ class Requirement(models.Model):
     r_info_submit_department = models.CharField('提出部门', choices=REQUIREMENT_DEPARTMENT_CHOICES, max_length=10,
                                                 default=DEPARTMENT_ZONGCAISHI)
     r_info_submit_person = models.CharField('提出人', max_length=10, default='')
-    r_info_value = models.CharField('价值', max_length=500, default='', blank=True)
+    r_info_value = models.CharField('价值', max_length=500, default=None, blank=True, null=True)
 
-    r_category = models.CharField('需求类别', choices=REQUIREMENT_CATEGORY, max_length=10, default='', blank=True)
-    r_leader = models.CharField('任务负责人', max_length=20, default='', blank=True)
-    r_value_ok = models.BooleanField(default=False)
-    r_handle = models.CharField('需求流转地', max_length=50, default='', blank=True)
-    r_status = models.CharField('需求流程状态', max_length=50, default='', blank=True)
+    # r_category = models.CharField('需求类别', choices=REQUIREMENT_CATEGORY, max_length=10, default=None, blank=True,
+    #                               null=True)
+    # r_leader = models.CharField('任务负责人', max_length=20, default=None, blank=True, null=True)
+    # r_value_ok = models.BooleanField(default=False, blank=True)
+    # r_handle = models.CharField('需求流转地', max_length=50, default=None, blank=True, null=True)
+    # r_status = models.CharField('需求流程状态', max_length=50, default=None, blank=True, null=True)
+    # r_workload = models.FloatField('工作量', default=None, blank=True, null=True)
 
     def __str__(self):
         return self.r_info_name
