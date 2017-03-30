@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+    <title>需求管理|需求列表</title>
+    <link rel="stylesheet" type="text/css" href="static/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/changelists.css" />
+</head>
+
+<!-- Container -->
+<div id="container">
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"><a href="#">需求管理</a></h1>
+        </div>
+        <div id="user-tools">
+            欢迎,
+            <strong>diaosumeng</strong>.
+            <a href="#">查看</a> /
+            <a href="#">修改密码</a> /
+            <a href="#">注销</a>
+        </div>
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrumbs">
+        <a href="#">主页</a>
+        &rsaquo; <a href="#">需求管理</a>
+        &rsaquo; 需求列表
+    </div>
+
+    <!-- Content -->
+    <div id="content" class="flex">
+        <h1>需求列表</h1>
+        <div id="content-main">
+            <ul class="object-tools">
+                <li>
+                    <a href="#" class="addlink">Add requirement</a>
+                </li>
+            </ul>
+
+            <div class="module" id="changelist">
+                <div class="results">
+                    <table id="result_list">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="action-checkbox-column">
+                                <div class="text"></div>
+                                <div class="clear"></div>
+                            </th>
+                            <th scope="col" class="sortable column-r_info_name">
+                                <div class="text"><a href="?o=1">需求名称</a></div>
+                                <div class="clear"></div>
+                            </th>
+                            <th scope="col" class="sortable column-r_info_submit_time">
+                                <div class="text"><a href="?o=2">提出日期</a></div>
+                                <div class="clear"></div>
+                            </th>
+                            <th scope="col" class="sortable column-r_info_submit_department">
+                                <div class="text"><a href="?o=3">提出部门</a></div>
+                                <div class="clear"></div>
+                            </th>
+                            <th scope="col" class="sortable column-r_info_submit_person">
+                                <div class="text"><a href="?o=4">提出人</a></div>
+                                <div class="clear"></div>
+                            </th>
+                            <th scope="col" class="sortable column-r_info_value">
+                                <div class="text"><a href="?o=5">价值</a></div>
+                                <div class="clear"></div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% if requirement_list %}
+                            {% for requirement in requirement_list %}
+                                {% if forloop.counter0|divisibleby:2 %}
+                                <tr class="row1">
+                                {% else %}
+                                <tr class="row2">
+                                {% endif %}
+                                    <td class="action-checkbox">+</td>
+                                    <th class="field-r_info_name"><a href="#">{{ requirement.r_info_name }}</a>
+                                    </th>
+                                    <td class="field-r_info_submit_time nowrap">{{ requirement.r_info_submit_time }}</td>
+                                    <td class="field-r_info_submit_department">{{ requirement.get_user_choices_display }}</td>
+                                    <td class="field-r_info_submit_person">{{ requirement.r_info_submit_person }}</td>
+                                    <td class="field-r_info_value">{{ requirement.r_info_value }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <p class="paginator">3 requirements</p>
+            </div>
+        </div>
+
+        <br class="clear"/>
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>

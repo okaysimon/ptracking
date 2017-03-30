@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Requirement
+from ProjectTracking.models import Requirement
 
 
 class QuestionAdmin(admin.ModelAdmin):
