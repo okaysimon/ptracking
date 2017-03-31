@@ -2,19 +2,19 @@ from django.db import models
 
 
 class Requirement(models.Model):
-    DEPARTMENT_ZONGCAISHI = '0'
-    DEPARTMENT_ZONGHE = '1'
-    DEPARTMENT_CAIWU = '2'
-    DEPARTMENT_CHUANGXIN = '3'
-    DEPARTMENT_WANGXIAO = '4'
-    DEPARTMENT_CHANXIAN = '5'
-    DEPARTMENT_SHOUXIAN = '6'
-    DEPARTMENT_SHUJU = '7'
-    DEPARTMENT_XINXI = '8'
+    DEPARTMENT_ZONGCAISHI = 0
+    DEPARTMENT_ZONGHE = 1
+    DEPARTMENT_CAIWU = 2
+    DEPARTMENT_CHUANGXIN = 3
+    DEPARTMENT_WANGXIAO = 4
+    DEPARTMENT_CHANXIAN = 5
+    DEPARTMENT_SHOUXIAN = 6
+    DEPARTMENT_SHUJU = 7
+    DEPARTMENT_XINXI = 8
 
-    CATEGORY_DEVELOPMENT = '0'
-    CATEGORY_OPERATION = '1'
-    CATEGORY_EMERGENCY = '2'
+    CATEGORY_DEVELOPMENT = 0
+    CATEGORY_OPERATION = 1
+    CATEGORY_EMERGENCY = 2
 
     REQUIREMENT_DEPARTMENT_CHOICES = (
         (DEPARTMENT_ZONGCAISHI, '总裁室'),
@@ -35,13 +35,13 @@ class Requirement(models.Model):
     r_id = models.AutoField('ID', primary_key=True)
     r_info_name = models.CharField('需求名称', max_length=100, default='')
     r_info_submit_time = models.DateTimeField('提交时间')
-    r_info_submit_department = models.CharField('提出部门', choices=REQUIREMENT_DEPARTMENT_CHOICES, max_length=10,
-                                                default=DEPARTMENT_ZONGCAISHI)
+    r_info_submit_department = models.IntegerField('提出部门', choices=REQUIREMENT_DEPARTMENT_CHOICES,
+                                                   default=DEPARTMENT_ZONGCAISHI)
     r_info_submit_person = models.CharField('提出人', max_length=10, default='')
-    r_info_value = models.CharField('价值', max_length=500, default=None, blank=True, null=True)
+    r_info_value = models.CharField('价值', max_length=500, default='无')
 
-    # r_category = models.CharField('需求类别', choices=REQUIREMENT_CATEGORY, max_length=10, default=None, blank=True,
-    #                               null=True)
+    # r_category = models.IntegerField('需求类别', choices=REQUIREMENT_CATEGORY, default=CATEGORY_DEVELOPMENT, blank=True,
+    #                                  null=True)
     # r_leader = models.CharField('任务负责人', max_length=20, default=None, blank=True, null=True)
     # r_value_ok = models.BooleanField(default=False, blank=True)
     # r_handle = models.CharField('需求流转地', max_length=50, default=None, blank=True, null=True)
