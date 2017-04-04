@@ -3,8 +3,8 @@
 <html lang="en-us">
 <head>
     <title>需求管理|需求列表</title>
-    <link rel="stylesheet" type="text/css" href="static/css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="static/css/changelists.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/changelists.css" />
 </head>
 
 <!-- Container -->
@@ -16,10 +16,10 @@
         </div>
         <div id="user-tools">
             欢迎,
-            <strong>diaosumeng</strong>.
+            <strong>{{ current_user }}</strong>.
             <a href="#">查看</a> /
             <a href="#">修改密码</a> /
-            <a href="#">注销</a>
+            <a href="/logout">注销</a>
         </div>
     </div>
     <!-- END Header -->
@@ -36,7 +36,7 @@
         <div id="content-main">
             <ul class="object-tools">
                 <li>
-                    <a href="#" class="addlink">Add requirement</a>
+                    <a href="#" class="addlink">+ 新增需求</a>
                 </li>
             </ul>
 
@@ -94,7 +94,7 @@
                         </tbody>
                     </table>
                 </div>
-                <p class="paginator">3 requirements</p>
+                <p class="paginator">共计 {{ requirement_list|length }} 个需求</p>
             </div>
         </div>
 

@@ -128,3 +128,6 @@ STATICFILES_DIRS = (
     ('images', os.path.join(STATIC_ROOT, 'images').replace('\\', '/')),
     ('upload', os.path.join(STATIC_ROOT, 'upload').replace('\\', '/')),
 )
+
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
