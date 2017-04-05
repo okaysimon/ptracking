@@ -16,7 +16,7 @@
     <!-- Header -->
     <div id="header">
         <div id="branding">
-            <h1 id="site-name"><a href="/">pTracking 用户登录</a></h1>
+            <h1 id="site-name"><a href="{% url 'ProjectTracking:index' %}">pTracking 用户登录</a></h1>
         </div>
     </div>
     <!-- END Header -->
@@ -24,7 +24,7 @@
     <!-- Content -->
     <div id="content" class="colM">
         <div id="content-main">
-            <form action="/login/?next=/" method="post" id="login-form">
+            <form action="{% url 'ProjectTracking:login' %}" method="post" id="login-form">
                 {% csrf_token %}
                 <div class="form-row">
                     <label class="required" for="id_username">用户名:</label>
