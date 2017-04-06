@@ -2,18 +2,20 @@
 
 <html lang="en-us">
 <head>
-    <title>需求管理|需求列表</title>
+    <title>需求列表 | 需求管理</title>
     <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/changelists.css" />
 </head>
 
+
+<body class=" app-ProjectTracking model-requirement change-list" data-admin-utc-offset="28800">
 <!-- Container -->
 <div id="container">
     {% include 'ProjectTracking/_header.html' %}
 
     <div class="breadcrumbs">
-        <a href="#">主页</a>
-        &rsaquo; <a href="#">需求管理</a>
+        <a href="/">主页</a>
+        &rsaquo; <a href="{% url 'ProjectTracking:index' %}">需求管理</a>
         &rsaquo; 需求列表
     </div>
 

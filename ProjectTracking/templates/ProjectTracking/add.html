@@ -2,7 +2,7 @@
 
 <html lang="en-us">
 <head>
-    <title>Add requirement | Django site admin</title>
+    <title>新增需求 | 需求管理</title>
     <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/forms.css"/>
 </head>
@@ -11,39 +11,30 @@
 
 <!-- Container -->
 <div id="container">
-    <!-- Header -->
-    <div id="header">
-        <div id="branding">
-            <h1 id="site-name"><a href="/admin/">Django administration</a></h1>
-        </div>
-
-        <div id="user-tools">
-            Welcome,
-            <strong>admin</strong>.
-            <a href="/">View site</a> /
-            <a href="/admin/password_change/">Change password</a> /
-            <a href="/admin/logout/">Log out</a>
-        </div>
-
-    </div>
-    <!-- END Header -->
+    {% include 'ProjectTracking/_header.html' %}
 
     <div class="breadcrumbs">
-        <a href="/admin/">Home</a>
-        &rsaquo; <a href="/admin/ProjectTracking/">Projecttracking</a>
-        &rsaquo; <a href="/admin/ProjectTracking/requirement/">Requirements</a>
-        &rsaquo; Add requirement
+        <a href="/">主页</a>
+        &rsaquo; <a href="{% url 'ProjectTracking:index' %}">需求管理</a>
+        &rsaquo; <a href="{% url 'ProjectTracking:index' %}">需求列表</a>
+        &rsaquo; 新增需求
     </div>
 
     <!-- Content -->
     <div id="content" class="colM">
-        <h1>Add requirement</h1>
+        <h1>新增需求</h1>
         <div id="content-main">
 
             <form enctype="multipart/form-data" action="" method="post" id="requirement_form" novalidate>
                 {% csrf_token %}
                 <div>
                     <fieldset class="module aligned ">
+                        <div class="form-row">
+                            <label class="required" for="id_username">用户名:</label>
+                            <input autofocus="" id="id_username" maxlength="254" name="username" type="text" required/>
+                        </div>
+
+
                         <div class="form-row field-r_info_name">
                             <div>
                                 <label class="required" for="id_r_info_name">需求名称:</label>
@@ -72,8 +63,8 @@
                         <div class="form-row field-r_info_submit_person">
                             <div>
                                 <label class="required" for="id_r_info_submit_person">提出人:</label>
-                                <input class="vTextField" id="id_r_info_submit_person" maxlength="10"
-                                       name="r_info_submit_person" type="text" required/>
+                                <input class="vTextField" id="id_r_info_submit_person" name="r_info_submit_person"
+                                       value="{{ current_user.last_name }} {{ current_user.first_name }}" disabled="true" required/>
                             </div>
                         </div>
 

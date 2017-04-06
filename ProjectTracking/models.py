@@ -1,7 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
-class Requirement(models.Model):
+class Employee(models.Model):
     DEPARTMENT_ZONGCAISHI = 0
     DEPARTMENT_ZONGHE = 1
     DEPARTMENT_CAIWU = 2
@@ -11,12 +12,7 @@ class Requirement(models.Model):
     DEPARTMENT_SHOUXIAN = 6
     DEPARTMENT_SHUJU = 7
     DEPARTMENT_XINXI = 8
-
-    CATEGORY_DEVELOPMENT = 0
-    CATEGORY_OPERATION = 1
-    CATEGORY_EMERGENCY = 2
-
-    REQUIREMENT_DEPARTMENT_CHOICES = (
+    DEPARTMENT_CHOICES = (
         (DEPARTMENT_ZONGCAISHI, '总裁室'),
         (DEPARTMENT_ZONGHE, '综合部'),
         (DEPARTMENT_CAIWU, '财务部'),
@@ -27,17 +23,30 @@ class Requirement(models.Model):
         (DEPARTMENT_SHUJU, '数据管理部'),
         (DEPARTMENT_XINXI, '信息技术部'),
     )
+
+    user = models.OneToOneField(User)
+    person = models.CharField(max_length=10, default='')
+    department = models.IntegerField('提出部门', choices=DEPARTMENT_CHOICES, default=DEPARTMENT_ZONGCAISHI)
+
+
+class Requirement(models.Model):
+    CATEGORY_DEVELOPMENT = 0
+    CATEGORY_OPERATION = 1
+    CATEGORY_EMERGENCY = 2
+
     REQUIREMENT_CATEGORY = (
         (CATEGORY_DEVELOPMENT, '开发类'),
         (CATEGORY_OPERATION, '运维类'),
         (CATEGORY_EMERGENCY, '紧急类'),
     )
     r_id = models.AutoField('ID', primary_key=True)
-    r_info_name = models.CharField('需求名称', max_length=100, default='')
+    r_info_name = models.CharField('需求名称', max_length=100)
     r_info_submit_time = models.DateTimeField('提交时间')
-    r_info_submit_department = models.IntegerField('提出部门', choices=REQUIREMENT_DEPARTMENT_CHOICES,
-                                                   default=DEPARTMENT_ZONGCAISHI)
-    r_info_submit_person = models.CharField('提出人', max_length=10, default='')
+    # r_info_submit_department = models.IntegerField('提出部门', choices=REQUIREMENT_DEPARTMENT_CHOICES,
+    #                                                default=DEPARTMENT_ZONGCAISHI)
+    # r_info_submit_person = models.CharField('提出人', max_length=10, default='')
+    r_info_submit_employee = models.ForeignKey(User, verbose_name='submit employee',
+                                               default=0)
     r_info_value = models.CharField('价值', max_length=500, default='无')
 
     # r_category = models.IntegerField('需求类别', choices=REQUIREMENT_CATEGORY, default=CATEGORY_DEVELOPMENT, blank=True,
