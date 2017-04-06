@@ -17,6 +17,17 @@ class IndexView(generic.ListView):
         return context
 
 
+def add_view(request):
+    if request.method == 'POST':
+        print(request.POST)
+    return render(request, 'ProjectTracking/add.html')
+
+
+def change_view(request):
+    print(request.POST)
+    return render(request, 'ProjectTracking/change.html')
+
+
 def login_view(request):
     errors = []
     if request.method == 'POST':

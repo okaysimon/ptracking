@@ -1,0 +1,14 @@
+<!-- Header -->
+<div id="header">
+    <div id="branding">
+        <h1 id="site-name"><a href="#">需求管理</a></h1>
+    </div>
+    <div id="user-tools">
+        欢迎,
+        <strong>{{ current_user }}</strong>.
+        <a href="#">查看</a> /
+        <a href="#">修改密码</a> /
+        <a href="{% url 'ProjectTracking:logout' %}">注销</a>
+    </div>
+</div>
+<!-- END Header -->

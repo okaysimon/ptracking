@@ -739,9 +739,9 @@ a.deletelink:focus, a.deletelink:hover {
     /*background-image: url(../img/tooltag-arrowright.svg);*/
 /*}*/
 
-/*.object-tools a.addlink {*/
-    /*background-image: url(../img/tooltag-add.svg);*/
-/*}*/
+.object-tools a.addlink {
+    background-image: url(../img/tooltag-add.svg);
+}
 
 /* OBJECT HISTORY */
 

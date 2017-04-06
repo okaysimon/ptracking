@@ -9,20 +9,7 @@
 
 <!-- Container -->
 <div id="container">
-    <!-- Header -->
-    <div id="header">
-        <div id="branding">
-            <h1 id="site-name"><a href="#">需求管理</a></h1>
-        </div>
-        <div id="user-tools">
-            欢迎,
-            <strong>{{ current_user }}</strong>.
-            <a href="#">查看</a> /
-            <a href="#">修改密码</a> /
-            <a href="{% url 'ProjectTracking:logout' %}">注销</a>
-        </div>
-    </div>
-    <!-- END Header -->
+    {% include 'ProjectTracking/_header.html' %}
 
     <div class="breadcrumbs">
         <a href="#">主页</a>
@@ -36,7 +23,7 @@
         <div id="content-main">
             <ul class="object-tools">
                 <li>
-                    <a href="#" class="addlink">+ 新增需求</a>
+                    <a href="{% url 'ProjectTracking:add' %}" class="addlink">新增需求</a>
                 </li>
             </ul>
 
@@ -87,6 +74,14 @@
                                     <td class="field-r_info_submit_department">{{ requirement.get_r_info_submit_department_display }}</td>
                                     <td class="field-r_info_submit_person">{{ requirement.r_info_submit_person }}</td>
                                     <td class="field-r_info_value"><a href="#">显示/隐藏</a></td>
+                                </tr>
+                                {% if forloop.counter0|divisibleby:2 %}
+                                <tr class="row1" style="display: none">
+                                {% else %}
+                                <tr class="row2" style="display: none">
+                                {% endif %}
+                                    <td colspan="3"></td>
+                                    <td colspan="3" class="field-r_info_value"><a href="#">{{ requirement.r_info_value }}</a></td>
                                 </tr>
                             {% endfor %}
                         {% endif %}

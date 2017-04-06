@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+    <title>Change requirement | Django site admin</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css"/>
+
+
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+    <script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+    <script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+    <script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+
+    <meta name="robots" content="NONE,NOARCHIVE"/>
+</head>
+
+
+<body class=" app-ProjectTracking model-requirement change-form"
+      data-admin-utc-offset="28800">
+
+<!-- Container -->
+<div id="container">
+
+
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+
+            <h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+
+        </div>
+
+
+        <div id="user-tools">
+
+            Welcome,
+            <strong>admin</strong>.
+
+
+            <a href="/">View site</a> /
+
+
+            <a href="/admin/password_change/">Change password</a> /
+
+            <a href="/admin/logout/">Log out</a>
+
+        </div>
+
+
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrumbs">
+        <a href="/admin/">Home</a>
+        &rsaquo; <a href="/admin/ProjectTracking/">Projecttracking</a>
+        &rsaquo; <a href="/admin/ProjectTracking/requirement/">Requirements</a>
+        &rsaquo; 用户账户密码加密的需求
+    </div>
+
+
+    <!-- Content -->
+    <div id="content" class="colM">
+
+        <h1>Change requirement</h1>
+        <div id="content-main">
+
+
+            <ul class="object-tools">
+
+                <li>
+
+                    <a href="/admin/ProjectTracking/requirement/6/history/" class="historylink">History</a>
+                </li>
+
+
+            </ul>
+
+
+            <form enctype="multipart/form-data" action="" method="post" id="requirement_form" novalidate><input
+                    type='hidden' name='csrfmiddlewaretoken'
+                    value='zMqeFcCrsl6MxUy1GtJeStEPRTHokU7E6tb7hjSe3fVB9wFfH0mWiDftf1W68PFz'/>
+                <div>
+
+
+                    <fieldset class="module aligned ">
+
+
+                        <div class="form-row field-r_info_name">
+
+
+                            <div>
+
+
+                                <label class="required" for="id_r_info_name">需求名称:</label>
+
+                                <input class="vTextField" id="id_r_info_name" maxlength="100" name="r_info_name"
+                                       type="text" value="用户账户密码加密的需求" required/>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row field-r_info_submit_time">
+
+
+                            <div>
+
+
+                                <label class="required" for="id_r_info_submit_time_0">提交时间:</label>
+
+                                <p class="datetime">Date: <input class="vDateField" id="id_r_info_submit_time_0"
+                                                                 name="r_info_submit_time_0" size="10" type="text"
+                                                                 value="2017-03-30" required/><br/>Time: <input
+                                        class="vTimeField" id="id_r_info_submit_time_1" name="r_info_submit_time_1"
+                                        size="8" type="text" value="13:21:07" required/></p>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row field-r_info_submit_department">
+
+
+                            <div>
+
+
+                                <label class="required" for="id_r_info_submit_department">提出部门:</label>
+
+                                <select id="id_r_info_submit_department" name="r_info_submit_department" required>
+                                    <option value="0">总裁室</option>
+                                    <option value="1">综合部</option>
+                                    <option value="2">财务部</option>
+                                    <option value="3">创新业务部</option>
+                                    <option value="4">网络销售部</option>
+                                    <option value="5">产险销售部</option>
+                                    <option value="6">寿险电销部</option>
+                                    <option value="7">数据管理部</option>
+                                    <option value="8" selected="selected">信息技术部</option>
+                                </select>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row field-r_info_submit_person">
+
+
+                            <div>
+
+
+                                <label class="required" for="id_r_info_submit_person">提出人:</label>
+
+                                <input class="vTextField" id="id_r_info_submit_person" maxlength="10"
+                                       name="r_info_submit_person" type="text" value="马晓昊" required/>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row field-r_info_value">
+
+
+                            <div>
+
+
+                                <label class="required" for="id_r_info_value">价值:</label>
+
+                                <input class="vTextField" id="id_r_info_value" maxlength="500" name="r_info_value"
+                                       type="text" value="无" required/>
+
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+
+                    <div class="submit-row">
+                        <input type="submit" value="Save" class="default" name="_save"/>
+
+
+                        <p class="deletelink-box"><a href="/admin/ProjectTracking/requirement/6/delete/"
+                                                     class="deletelink">Delete</a></p>
+
+
+                        <input type="submit" value="Save and add another" name="_addanother"/>
+                        <input type="submit" value="Save and continue editing" name="_continue"/>
+                    </div>
+
+
+                    <script type="text/javascript"
+                            id="django-admin-form-add-constants"
+                            src="/static/admin/js/change_form.js"
+                    >
+                    </script>
+
+
+                    <script type="text/javascript"
+                            id="django-admin-prepopulated-fields-constants"
+                            src="/static/admin/js/prepopulate_init.js"
+                            data-prepopulated-fields="[]">
+                    </script>
+
+
+                </div>
+            </form>
+        </div>
+
+
+        <br class="clear"/>
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>
