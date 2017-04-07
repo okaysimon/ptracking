@@ -25,16 +25,10 @@
         <h1>新增需求</h1>
         <div id="content-main">
 
-            <form enctype="multipart/form-data" action="" method="post" id="requirement_form" novalidate>
+            <form enctype="multipart/form-data" action="" method="post" id="requirement_form">
                 {% csrf_token %}
                 <div>
                     <fieldset class="module aligned ">
-                        <div class="form-row">
-                            <label class="required" for="id_username">用户名:</label>
-                            <input autofocus="" id="id_username" maxlength="254" name="username" type="text" required/>
-                        </div>
-
-
                         <div class="form-row field-r_info_name">
                             <div>
                                 <label class="required" for="id_r_info_name">需求名称:</label>
@@ -46,16 +40,8 @@
                         <div class="form-row field-r_info_submit_department">
                             <div>
                                 <label class="required" for="id_r_info_submit_department">提出部门:</label>
-                                <select id="id_r_info_submit_department" name="r_info_submit_department" required>
-                                    <option value="0" selected="selected">总裁室</option>
-                                    <option value="1">综合部</option>
-                                    <option value="2">财务部</option>
-                                    <option value="3">创新业务部</option>
-                                    <option value="4">网络销售部</option>
-                                    <option value="5">产险销售部</option>
-                                    <option value="6">寿险电销部</option>
-                                    <option value="7">数据管理部</option>
-                                    <option value="8">信息技术部</option>
+                                <select id="id_r_info_submit_department" name="r_info_submit_department" disabled="true" required>
+                                    <option value="{{ current_user.employee.department }}" selected="selected">{{ current_user.employee.get_department_display }}</option>
                                 </select>
                             </div>
                         </div>
@@ -64,7 +50,7 @@
                             <div>
                                 <label class="required" for="id_r_info_submit_person">提出人:</label>
                                 <input class="vTextField" id="id_r_info_submit_person" name="r_info_submit_person"
-                                       value="{{ current_user.last_name }} {{ current_user.first_name }}" disabled="true" required/>
+                                       value="{{ current_user.employee.person }}" disabled="true" required/>
                             </div>
                         </div>
 
@@ -83,12 +69,6 @@
 {#                        <input type="submit" value="Save and continue editing" name="_continue"/>#}
                     </div>
 
-{#                    <script type="text/javascript" id="django-admin-form-add-constants" src="/static/admin/js/change_form.js"#}
-{#                            data-model-name="requirement">#}
-{#                    </script>#}
-{#                    <script type="text/javascript" id="django-admin-prepopulated-fields-constants" src="/static/admin/js/prepopulate_init.js"#}
-{#                            data-prepopulated-fields="[]">#}
-{#                    </script>#}
                 </div>
             </form>
         </div>

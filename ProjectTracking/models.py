@@ -25,8 +25,8 @@ class Employee(models.Model):
     )
 
     user = models.OneToOneField(User)
-    person = models.CharField(max_length=10, default='')
-    department = models.IntegerField('提出部门', choices=DEPARTMENT_CHOICES, default=DEPARTMENT_ZONGCAISHI)
+    person = models.CharField('姓名', max_length=10)
+    department = models.IntegerField('部门', choices=DEPARTMENT_CHOICES, default=DEPARTMENT_ZONGCAISHI)
 
 
 class Requirement(models.Model):
@@ -42,11 +42,7 @@ class Requirement(models.Model):
     r_id = models.AutoField('ID', primary_key=True)
     r_info_name = models.CharField('需求名称', max_length=100)
     r_info_submit_time = models.DateTimeField('提交时间')
-    # r_info_submit_department = models.IntegerField('提出部门', choices=REQUIREMENT_DEPARTMENT_CHOICES,
-    #                                                default=DEPARTMENT_ZONGCAISHI)
-    # r_info_submit_person = models.CharField('提出人', max_length=10, default='')
-    r_info_submit_employee = models.ForeignKey(User, verbose_name='submit employee',
-                                               default=0)
+    r_info_submit_employee = models.ForeignKey(User, verbose_name='提出用户', default=0)
     r_info_value = models.CharField('价值', max_length=500, default='无')
 
     # r_category = models.IntegerField('需求类别', choices=REQUIREMENT_CATEGORY, default=CATEGORY_DEVELOPMENT, blank=True,
@@ -56,6 +52,3 @@ class Requirement(models.Model):
     # r_handle = models.CharField('需求流转地', max_length=50, default=None, blank=True, null=True)
     # r_status = models.CharField('需求流程状态', max_length=50, default=None, blank=True, null=True)
     # r_workload = models.FloatField('工作量', default=None, blank=True, null=True)
-
-    def __str__(self):
-        return self.r_info_name

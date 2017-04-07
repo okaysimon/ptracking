@@ -73,8 +73,8 @@
                                     <th class="field-r_info_name"><a href="#">{{ requirement.r_info_name }}</a>
                                     </th>
                                     <td class="field-r_info_submit_time nowrap">{{ requirement.r_info_submit_time|date:"Y-m-d H:i:s" }}</td>
-                                    <td class="field-r_info_submit_department">{{ requirement.get_r_info_submit_department_display }}</td>
-                                    <td class="field-r_info_submit_person">{{ requirement.r_info_submit_person }}</td>
+                                    <td class="field-r_info_submit_department">{{ requirement.r_info_submit_employee.employee.get_department_display }}</td>
+                                    <td class="field-r_info_submit_person">{{ requirement.r_info_submit_employee.employee.person }}</td>
                                     <td class="field-r_info_value"><a href="#">显示/隐藏</a></td>
                                 </tr>
                                 {% if forloop.counter0|divisibleby:2 %}

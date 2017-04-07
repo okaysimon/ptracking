@@ -5,28 +5,30 @@ from django.contrib.auth.models import User
 from ProjectTracking.models import Requirement, Employee
 
 
-class QuestionAdmin(admin.ModelAdmin):
+class RequirementAdmin(admin.ModelAdmin):
     # fields = ['r_info_name',
     #           'r_info_submit_time',
-    #           # 'r_info_submit_department',
-    #           # 'r_info_submit_person',
     #           'r_info_submit_employee',
     #           'r_info_value',
-    #           # 'r_category',
-    #           # 'r_leader',
     #           ]
     list_display = ('r_info_name',
                     'r_info_submit_time',
                     # 'r_info_submit_employee',
-                    # 'r_info_submit_department',
-                    # 'r_info_submit_person',
-                    # 'r_info_value',
-                    # 'r_category',
-                    # 'r_leader',
+                    'r_info_submit_department',
+                    'r_info_submit_person',
+                    'r_info_value',
                     )
 
+    @staticmethod
+    def r_info_submit_person(obj):
+        return obj.r_info_submit_employee.employee.person
 
-admin.site.register(Requirement, QuestionAdmin)
+    @staticmethod
+    def r_info_submit_department(obj):
+        return obj.r_info_submit_employee.employee.get_department_display()
+
+
+admin.site.register(Requirement, RequirementAdmin)
 
 
 class EmployeeInline(admin.StackedInline):
@@ -45,10 +47,7 @@ class EmployeeAdmin(UserAdmin):
 
     @staticmethod
     def department(obj):
-        for k, v in Employee.DEPARTMENT_CHOICES:
-            if k == obj.employee.department:
-                return v
-        return '-'
+        return obj.employee.get_department_display()
 
 
 admin.site.unregister(User)
