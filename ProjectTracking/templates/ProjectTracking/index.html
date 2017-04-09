@@ -5,6 +5,14 @@
     <title>需求列表 | 需求管理</title>
     <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/changelists.css" />
+    <script type="text/javascript" src="/static/js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".field-i_value > a").click(function(){
+                $(this).parent().parent().next('.tr-i_value').toggle();
+            });
+        });
+    </script>
 </head>
 
 
@@ -38,23 +46,23 @@
                                 <div class="text"></div>
                                 <div class="clear"></div>
                             </th>
-                            <th scope="col" class="sortable column-r_info_name">
+                            <th scope="col" class="sortable column-i_name">
                                 <div class="text"><a href="?o=1">需求名称</a></div>
                                 <div class="clear"></div>
                             </th>
-                            <th scope="col" class="sortable column-r_info_submit_time">
+                            <th scope="col" class="sortable column-i_submit_time">
                                 <div class="text"><a href="?o=2">提出日期</a></div>
                                 <div class="clear"></div>
                             </th>
-                            <th scope="col" class="sortable column-r_info_submit_department">
+                            <th scope="col" class="sortable column-i_submit_department">
                                 <div class="text"><a href="?o=3">提出部门</a></div>
                                 <div class="clear"></div>
                             </th>
-                            <th scope="col" class="sortable column-r_info_submit_person">
+                            <th scope="col" class="sortable column-i_submit_person">
                                 <div class="text"><a href="?o=4">提出人</a></div>
                                 <div class="clear"></div>
                             </th>
-                            <th scope="col" class="sortable column-r_info_value">
+                            <th scope="col" class="sortable column-i_value">
                                 <div class="text"><a href="?o=5">价值</a></div>
                                 <div class="clear"></div>
                             </th>
@@ -69,13 +77,21 @@
                                 {% else %}
                                 <tr class="row2">
                                 {% endif %}
-                                    <td class="action-checkbox">{{ requirement.r_id }}</td>
-                                    <th class="field-r_info_name"><a href="#">{{ requirement.r_info_name }}</a>
+                                    <td class="action-checkbox">{{ forloop.counter0|add:1 }}</td>
+                                    <th class="field-i_name"><a href="{% url 'ProjectTracking:change' requirement.r_id %}">{{ requirement.i_name }}</a>
                                     </th>
-                                    <td class="field-r_info_submit_time nowrap">{{ requirement.r_info_submit_time|date:"Y-m-d H:i:s" }}</td>
-                                    <td class="field-r_info_submit_department">{{ requirement.r_info_submit_employee.employee.get_department_display }}</td>
-                                    <td class="field-r_info_submit_person">{{ requirement.r_info_submit_employee.employee.person }}</td>
-                                    <td class="field-r_info_value"><a href="#">显示/隐藏</a></td>
+                                    <td class="field-i_submit_time nowrap">{{ requirement.i_submit_time|date:"Y-m-d H:i:s" }}</td>
+                                    <td class="field-i_submit_department">{{ requirement.i_submit_user.employee.get_department_display }}</td>
+                                    <td class="field-i_submit_person">{{ requirement.i_submit_user.employee.person }}</td>
+                                    <td class="field-i_value"><a href="#">显示/隐藏</a></td>
+                                </tr>
+                                {% if forloop.counter0|divisibleby:2 %}
+                                <tr class="row1 tr-i_value" style="display: none">
+                                {% else %}
+                                <tr class="row2 tr-i_value" style="display: none">
+                                {% endif %}
+                                    <td colspan="1"></td>
+                                    <td colspan="5">{{ requirement.i_value }}</td>
                                 </tr>
                                 {% if forloop.counter0|divisibleby:2 %}
                                 <tr class="row1" style="display: none">
@@ -83,7 +99,7 @@
                                 <tr class="row2" style="display: none">
                                 {% endif %}
                                     <td colspan="3"></td>
-                                    <td colspan="3" class="field-r_info_value"><a href="#">{{ requirement.r_info_value }}</a></td>
+                                    <td colspan="3" class="field-i_value"><a href="#">{{ requirement.i_value }}</a></td>
                                 </tr>
                             {% endfor %}
                         {% endif %}

@@ -2,8 +2,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils import timezone
 from django.views import generic
 
+from ProjectTracking.forms import RequirementForm
 from ProjectTracking.models import Requirement
 
 
@@ -19,22 +21,47 @@ class IndexView(generic.ListView):
 
 def add_view(request):
     if request.method == 'POST':
-        name = request.POST['r_info_name'] if request.POST.get('r_info_name') else None
-        submit_department = request.POST['r_info_submit_department'] if request.POST.get('r_info_submit_department') else None
-        submit_person = request.POST['r_info_submit_person'] if request.POST.get('r_info_submit_person') else None
-        value = request.POST['r_info_value'] if request.POST.get('r_info_value') else None
+        form = RequirementForm(request.POST, request.FILES)
+        if form.is_valid():
+            requirement = form.save(commit=False)
+            requirement.i_submit_time = timezone.now()
+            requirement.i_submit_user = request.user
+            if requirement.i_file:
+                extension = requirement.i_file.name.split('.')[-1]
+                requirement.i_file.name = requirement.i_name+'.V0.1.'+extension
+            requirement.save()
+            return HttpResponseRedirect(reverse('ProjectTracking:index'))
+    else:
+        form = RequirementForm()
+    return render(request, 'ProjectTracking/add.html', {'current_user': request.user,
+                                                        'form': form})
 
-        # submit_time =
 
-        print(name, submit_department, submit_person, value)
-        return HttpResponseRedirect(reverse('ProjectTracking:index'))
-    print(request.user.get_full_name())
-    return render(request, 'ProjectTracking/add.html', {'current_user': request.user})
+def filename_update(filename, requirement_name, value):
+    tmp = filename.split('.')
+    version = float('.'.join(tmp[-3:-1])[1:]) + value
+    version = 'V' + str(version)
+    extension = tmp[-1]
+    return '.'.join([requirement_name, version, extension])
 
 
-def change_view(request):
-    print(request.POST)
-    return render(request, 'ProjectTracking/change.html')
+def change_view(request, r_id):
+    requirement = Requirement.objects.get(r_id=r_id)
+    name_old = requirement.i_file.name
+    if request.method == 'POST':
+        form = RequirementForm(request.POST, request.FILES, instance=requirement)
+        if form.is_valid():
+            requirement = form.save(commit=False)
+            if name_old != requirement.i_file.name:
+                requirement.i_file.name = filename_update(name_old, requirement.i_name, 0.1)
+                print(requirement.i_file.name)
+            requirement.save()
+            return HttpResponseRedirect(reverse('ProjectTracking:index'))
+    else:
+        form = RequirementForm(instance=requirement)
+    return render(request, 'ProjectTracking/change.html', {'current_user': request.user,
+                                                           'requirement': requirement,
+                                                           'form': form})
 
 
 def login_view(request):
@@ -51,7 +78,6 @@ def login_view(request):
                 errors.append('disabled account')
         else:
             errors.append('invalid user')
-        print(username, password, user)
     return render(request, 'ProjectTracking/login.html')
 
 

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -29,24 +30,35 @@ class Employee(models.Model):
     department = models.IntegerField('部门', choices=DEPARTMENT_CHOICES, default=DEPARTMENT_ZONGCAISHI)
 
 
-class Requirement(models.Model):
-    CATEGORY_DEVELOPMENT = 0
-    CATEGORY_OPERATION = 1
-    CATEGORY_EMERGENCY = 2
+def validate_file_extension(value):
+    if hasattr(value.file, 'content_type'):
+        if value.file.content_type not in ['application/msword',
+                                           'application/vnd.openxmlformats-officedocument.wordprocessingml.document']:
+            raise ValidationError(u'File not supported!')
+    else:
+        if not value.file.name.endswith('.docx') and not value.file.name.endswith('.doc'):
+            raise ValidationError(u'File not supported!')
 
+
+class Requirement(models.Model):
+    CATEGORY_DEVELOPMENT = '0'
+    CATEGORY_OPERATION = '1'
+    CATEGORY_EMERGENCY = '2'
     REQUIREMENT_CATEGORY = (
         (CATEGORY_DEVELOPMENT, '开发类'),
         (CATEGORY_OPERATION, '运维类'),
         (CATEGORY_EMERGENCY, '紧急类'),
     )
-    r_id = models.AutoField('ID', primary_key=True)
-    r_info_name = models.CharField('需求名称', max_length=100)
-    r_info_submit_time = models.DateTimeField('提交时间')
-    r_info_submit_employee = models.ForeignKey(User, verbose_name='提出用户', default=0)
-    r_info_value = models.CharField('价值', max_length=500, default='无')
 
-    # r_category = models.IntegerField('需求类别', choices=REQUIREMENT_CATEGORY, default=CATEGORY_DEVELOPMENT, blank=True,
-    #                                  null=True)
+    r_id = models.AutoField('ID', primary_key=True)
+    i_name = models.CharField('需求名称', max_length=100, unique=True)
+    i_submit_time = models.DateTimeField('提交时间')
+    i_submit_user = models.ForeignKey(User, verbose_name='提出用户', default=0)
+    i_value = models.CharField('价值', max_length=500, default='无')
+    i_file = models.FileField('需求文档', upload_to='uploads/', validators=[validate_file_extension])
+    # r_file_framework = models.FileField('架构文档', upload_to='uploads/')
+
+    r_category = models.CharField('需求类别', max_length=1, choices=REQUIREMENT_CATEGORY, default='', blank=True, null=True)
     # r_leader = models.CharField('任务负责人', max_length=20, default=None, blank=True, null=True)
     # r_value_ok = models.BooleanField(default=False, blank=True)
     # r_handle = models.CharField('需求流转地', max_length=50, default=None, blank=True, null=True)

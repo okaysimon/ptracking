@@ -6,26 +6,31 @@ from ProjectTracking.models import Requirement, Employee
 
 
 class RequirementAdmin(admin.ModelAdmin):
-    # fields = ['r_info_name',
-    #           'r_info_submit_time',
-    #           'r_info_submit_employee',
-    #           'r_info_value',
-    #           ]
-    list_display = ('r_info_name',
-                    'r_info_submit_time',
-                    # 'r_info_submit_employee',
-                    'r_info_submit_department',
-                    'r_info_submit_person',
-                    'r_info_value',
+    model = Requirement
+    fieldsets = [
+        ('需求基本信息', {'fields': ['i_name',
+                               'i_submit_time',
+                               'i_submit_user',
+                               'i_value',
+                               'i_file']}),
+        ('需求管理相关信息与状态', {'fields': ['r_category']}),
+        # ('项目管理相关信息与状态', {'fields': ['']}),
+    ]
+
+    list_display = ('i_name',
+                    'i_submit_time',
+                    'i_submit_department',
+                    'i_submit_person',
+                    'i_value',
                     )
 
     @staticmethod
-    def r_info_submit_person(obj):
-        return obj.r_info_submit_employee.employee.person
+    def i_submit_person(obj):
+        return obj.i_submit_user.employee.person
 
     @staticmethod
-    def r_info_submit_department(obj):
-        return obj.r_info_submit_employee.employee.get_department_display()
+    def i_submit_department(obj):
+        return obj.i_submit_user.employee.get_department_display()
 
 
 admin.site.register(Requirement, RequirementAdmin)
@@ -39,7 +44,7 @@ class EmployeeInline(admin.StackedInline):
 
 class EmployeeAdmin(UserAdmin):
     inlines = (EmployeeInline, )
-    list_display = ('username', 'person', 'department', 'is_staff',)
+    list_display = ('username', 'person', 'department', 'is_staff', 'is_active')
 
     @staticmethod
     def person(obj):

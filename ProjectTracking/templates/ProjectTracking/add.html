@@ -25,42 +25,49 @@
         <h1>新增需求</h1>
         <div id="content-main">
 
-            <form enctype="multipart/form-data" action="" method="post" id="requirement_form">
+            <form enctype="multipart/form-data" action="" method="post" id="requirement_form" novalidate>
                 {% csrf_token %}
+                {{ form.non_field_errors }}
                 <div>
                     <fieldset class="module aligned ">
-                        <div class="form-row field-r_info_name">
+                        <div class="form-row field-i_name">
                             <div>
-                                <label class="required" for="id_r_info_name">需求名称:</label>
-                                <input class="vTextField" id="id_r_info_name" maxlength="100" name="r_info_name"
-                                       type="text" required/>
+                                {{ form.i_name.errors }}
+                                <label class="required" for="{{ form.i_name.id_for_label }}">需求名称:</label>
+                                {{ form.i_name }}
                             </div>
                         </div>
 
-                        <div class="form-row field-r_info_submit_department">
+                        <div class="form-row field-i_submit_department">
                             <div>
-                                <label class="required" for="id_r_info_submit_department">提出部门:</label>
-                                <select id="id_r_info_submit_department" name="r_info_submit_department" disabled="true" required>
+                                <label class="required" for="id_i_submit_department">提出人:</label>
+                                <select id="id_i_submit_department" name="i_submit_department" disabled="true" required>
                                     <option value="{{ current_user.employee.department }}" selected="selected">{{ current_user.employee.get_department_display }}</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="form-row field-r_info_submit_person">
                             <div>
-                                <label class="required" for="id_r_info_submit_person">提出人:</label>
-                                <input class="vTextField" id="id_r_info_submit_person" name="r_info_submit_person"
+                                <label class="required" for="id_i_submit_person"></label>
+                                <input class="vTextField" id="id_i_submit_person" name="i_submit_person"
                                        value="{{ current_user.employee.person }}" disabled="true" required/>
                             </div>
                         </div>
 
-                        <div class="form-row field-r_info_value">
+                        <div class="form-row field-i_value">
                             <div>
-                                <label class="required" for="id_r_info_value">价值:</label>
-                                <input class="vTextField" id="id_r_info_value" maxlength="500" name="r_info_value"
-                                       type="text" value="无" required/>
+                                {{ form.i_value.errors }}
+                                <label class="required" for="{{ form.i_value.id_for_label }}">价值:</label>
+                                {{ form.i_value }}
                             </div>
                         </div>
+
+                        <div class="form-row field-i_file">
+                            <div>
+                                {{ form.i_file.errors }}
+                                <label class="required" for="{{ form.i_file.id_for_label }}">需求文档:</label>
+                                {{ form.i_file }}
+                            </div>
+                        </div>
+
                     </fieldset>
 
                     <div class="submit-row">
