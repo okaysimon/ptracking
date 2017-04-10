@@ -9,6 +9,6 @@ urlpatterns = [
     # url(r'^login/$', LoginView.as_view(), name='index'),
     url(r'^login/$', login_view, name='login'),
     url(r'^logout/$', logout_view, name='logout'),
-    url(r'^requirement/add/$', add_view, name='add'),
-    url(r'^requirement/(?P<r_id>[0-9]+)/change/$', change_view, name='change'),
+    url(r'^add/$', add_view, name='add'),
+    url(r'^(?P<r_id>[0-9]+)/change/$', change_view, name='change'),
 ]
